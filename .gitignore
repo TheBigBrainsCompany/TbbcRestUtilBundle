@@ -1,0 +1,10 @@
+vendor/
+composer.lock
+
+# IDE/ENV
+.DS_Store
+nbproject/*
+catalog.xml
+.idea
+*.project
+.vagrant

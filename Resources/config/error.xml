@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="tbbc_restutil.error.mapping.exception_mapping.class">Tbbc\RestUtil\Error\Mapping\ExceptionMapping</parameter>
+        <parameter key="tbbc_restutil.error.mapping.exception_map.class">Tbbc\RestUtil\Error\Mapping\ExceptionMap</parameter>
+        <parameter key="tbbc_restutil.error.error_resolver.class">Tbbc\RestUtil\Error\ErrorResolver</parameter>
+    </parameters>
+
+    <services>
+        <service id="tbbc_restutil.error.mapping.exception_map" class="%tbbc_restutil.error.mapping.exception_map.class%" />
+
+        <service id="tbbc_restutil.error.error_resolver" class="%tbbc_restutil.error.error_resolver.class%">
+            <argument type="service" id="tbbc_restutil.error.mapping.exception_map" />
+        </service>
+    </services>
+</container>
