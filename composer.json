@@ -11,6 +11,7 @@
         }
     ],
     "require": {
+        "tbbc/rest-util": "1.0.x-dev",
         "symfony/framework-bundle": ">=2.0"
     },
     "require-dev": {
