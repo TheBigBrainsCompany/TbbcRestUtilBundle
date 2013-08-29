@@ -43,26 +43,26 @@ tbbc_rest_util:
         use_bundled_factories: true
         exception_mapping:
             FormErrorException:
-                class: "Tbbc\RestUtilBundle\Error\Exception\FormErrorException"
+                class: "Tbbc\\RestUtilBundle\\Error\\Exception\\FormErrorException"
                 factory: tbbc_rest_util_form_error
                 http_status_code: 400
                 error_code: 400101
                 error_message: "Invalid input"
-                more_info_url: "http://api.my.tld/doc/error/400101
+                more_info_url: "http://api.my.tld/doc/error/400101"
             AccessDeniedException:
-                class: "Symfony\Component\Security\Core\Exception"
+                class: "Symfony\\Component\\Security\\Core\\AccessDeniedException"
                 factory: default
                 http_status_code: 401
                 error_code: 401001
                 error_message: "Access denied"
                 extended_message: "The given token don't have enough privileges for accessing to this resource"
-                more_info_url: "http://api.my.tld/doc/error/401001
+                more_info_url: "http://api.my.tld/doc/error/401001"
             CustomException:
-                class: "My\ApiBundle\Exception\CustomException"
+                class: "My\\ApiBundle\\Exception\\CustomException"
                 factory: my_api_custom
                 http_status_code: 501
                 error_code: 501001
-                more_info_url: "http://api.my.tld/doc/error/501001
+                more_info_url: "http://api.my.tld/doc/error/501001"
             Exception:
                 class: "\Exception"
                 factory: default
@@ -78,7 +78,8 @@ tbbc_rest_util:
 
 namespace My\ApiBundle\EventListener;
 
-// ... use statements
+// ... other use statements
+use Tbbc\RestUtil\Error\ErrorResolverInterface;
 
 class RestExceptionListener extends ExceptionListener
 {
@@ -156,6 +157,8 @@ class RestExceptionListener extends ExceptionListener
 
 namespace My\ApiBundle\Controller;
 
+// ... other use statements
+use Symfony\Component\Security\Core\AccessDeniedException;
 use Tbbc\RestUtilBundle\Error\Exception\FormErrorException;
 use My\ApiBundle\Exception\CustomException;
 
@@ -260,28 +263,28 @@ class CustomErrorFactory implements ErrorFactoryInterface
 
 **ENJOY!**
 
-For the exception thrown in the previous `PostCommentsController` example, the response body will be respectively
+For the exceptions thrown in the previous `PostCommentsController` class example, the response body will be respectively
 something like the following:
 
-**AccessDeniedException**:
+For the **AccessDeniedException** exception:
 
 ```json
 {
     "http_status_code": 401,
-    "code":             401001,
-    "message":          "Access denied",
+    "code": 401001,
+    "message": "Access denied",
     "extended_message": "The given token don't have enough privileges for accessing to this resource",
-    "more_info_url":    "http:\/\/api.my.tld\/doc\/error\/401001"
+    "more_info_url": "http:\/\/api.my.tld\/doc\/error\/401001"
 }
 ```
 
-**FormErrorException**:
+For the **FormErrorException** exception:
 
 ```json
 {
     "http_status_code": 400,
-    "code":             400101,
-    "message":          "Invalid input",
+    "code": 400101,
+    "message": "Invalid input",
     "extended_message": {
         "global_errors": [
             "Bubbled form error!"
@@ -292,19 +295,19 @@ something like the following:
             ]
         }
     },
-    "more_info_url":    "http:\/\/api.my.tld\/doc\/error\/400101"
+    "more_info_url": "http:\/\/api.my.tld\/doc\/error\/400101"
 }
 ```
 
-**CustomException**:
+For the **CustomException** exception:
 
 ```json
 {
     "http_status_code": 501,
-    "code":             501001,
-    "message":          "Something bad just happened!",
+    "code": 501001,
+    "message": "Something bad just happened!",
     "extended_message": null,
-    "more_info_url":    "http:\/\/api.my.tld\/doc\/error\/501001"
+    "more_info_url": "http:\/\/api.my.tld\/doc\/error\/501001"
 }
 ```
 
