@@ -60,8 +60,6 @@ class FormErrorFactoryTest extends \PHPUnit_Framework_TestCase
         $this->errorResolver = new ErrorResolver($exceptionMap);
 
         $this->form = $this->createForm();
-
-        $this->translator = $this->getMock('\Symfony\Component\Translation\TranslatorInterface');
     }
 
     public function tearDown()
