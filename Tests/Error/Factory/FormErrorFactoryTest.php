@@ -47,7 +47,7 @@ class FormErrorFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->formErrorExceptionMapping = new ExceptionMapping(array(
             'exceptionClassName' => '\Tbbc\RestUtilBundle\Error\Exception\FormErrorException',
-            'factory' => 'form_error',
+            'factory' => 'tbbc_restutil_form_error',
             'httpStatusCode' => 400,
             'errorCode' => 400101,
             'errorMessage' => 'An error has occurred while processing your request, make sure your data are valid',
