@@ -9,6 +9,7 @@
 
 namespace Tbbc\RestUtilBundle\Tests\DependencyInjection;
 
+use Tbbc\RestUtil\Error\DefaultErrorFactory;
 use Tbbc\RestUtil\Error\Error;
 use Tbbc\RestUtil\Error\ErrorFactoryInterface;
 use Tbbc\RestUtil\Error\ErrorResolver;
@@ -71,6 +72,7 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
         // Manual construction of expected ErrorResolver
         $exceptionMap = $this->getExceptionMap();
         $expectedErrorResolver = new ErrorResolver($exceptionMap);
+        $expectedErrorResolver->registerFactory(new DefaultErrorFactory());
 
         $this->assertEquals($expectedErrorResolver, $this->container->get('tbbc_restutil.error.error_resolver'));
     }
@@ -96,8 +98,8 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
         ;
 
         $exceptionMap->add(new ExceptionMapping(array(
-                'exceptionClassName' => 'My\FormException',
-                'factory' => 'form',
+                'exceptionClassName' => 'My\CustomException',
+                'factory' => 'custom',
                 'httpStatusCode' => 400,
                 'errorCode' => 400110,
                 'errorMessage' => 'Validation failed',
@@ -117,6 +119,7 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
         return array(
             "tbbc_restutil" => array (
                 "error" => array (
+                    'use_bundled_factories' => false,
                     'exception_mapping' => array(
                         'InvalidArgumentException' => array(
                             'class' => '\RuntimeException',
@@ -129,8 +132,8 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
 
                         ),
                         'FormException' => array(
-                            'class' => 'My\FormException',
-                            'factory' => 'form',
+                            'class' => 'My\CustomException',
+                            'factory' => 'custom',
                             'http_status_code' => 400,
                             'error_code' => 400110,
                             'error_message' => 'Validation failed',

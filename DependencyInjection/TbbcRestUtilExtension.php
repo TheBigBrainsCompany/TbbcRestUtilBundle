@@ -38,6 +38,12 @@ class TbbcRestUtilExtension extends Extension
 
         $loader->load('error.xml');
 
+        // factories loading
+        if (true === (bool) $config['error']['use_bundled_factories']) {
+            $loader->load('error_factories.xml');
+        }
+
+        // mapping configuration
         $this->configureErrorExceptionMapping($config, $container);
     }
 

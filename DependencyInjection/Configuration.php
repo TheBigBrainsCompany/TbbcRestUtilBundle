@@ -40,6 +40,7 @@ class Configuration implements ConfigurationInterface
      * Example for yaml driver:
      * tbbc_restutil:
      *     error:
+     *         use_bundled_factories: true
      *         exception_mapping:
      *             InvalidArgumentException:
      *                 class: "\InvalidArgumentException"
@@ -59,6 +60,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('error')
                     ->children()
+                        ->booleanNode('use_bundled_factories')->defaultTrue()->end()
                         ->arrayNode('exception_mapping')
                             ->useAttributeAsKey('name')
                             ->prototype('array')

@@ -9,6 +9,7 @@
 
 namespace Tbbc\RestUtilBundle\Tests\DependencyInjection\Compiler;
 
+use Tbbc\RestUtil\Error\DefaultErrorFactory;
 use Tbbc\RestUtil\Error\Error;
 use Tbbc\RestUtil\Error\ErrorFactoryInterface;
 use Tbbc\RestUtil\Error\ErrorResolver;
@@ -57,18 +58,18 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
         $this->extension->load($config, $this->container);
 
         // add custom factory definition to the container
-        $formErrorFactoryDefinition = new Definition(
-            '\Tbbc\RestUtilBundle\Tests\DependencyInjection\Compiler\FormErrorFactory');
-        $formErrorFactoryDefinition->addTag('tbbc_restutil.error_factory');
-        $this->container->addDefinitions(array($formErrorFactoryDefinition));
+        $customErrorFactoryDefinition = new Definition(
+            '\Tbbc\RestUtilBundle\Tests\DependencyInjection\Compiler\CustomErrorFactory');
+        $customErrorFactoryDefinition->addTag('tbbc_restutil.error_factory');
+        $this->container->addDefinitions(array($customErrorFactoryDefinition));
 
         $this->container->compile();
 
         // Manual construction of expected ErrorResolver
         $exceptionMap = $this->getExceptionMap();
         $expectedErrorResolver = new ErrorResolver($exceptionMap);
-        $formErrorFactory = new FormErrorFactory();
-        $expectedErrorResolver->registerFactory($formErrorFactory);
+        $expectedErrorResolver->registerFactory(new DefaultErrorFactory());
+        $expectedErrorResolver->registerFactory(new CustomErrorFactory());
 
         $this->assertEquals($expectedErrorResolver, $this->container->get('tbbc_restutil.error.error_resolver'));
     }
@@ -94,8 +95,8 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
         ;
 
         $exceptionMap->add(new ExceptionMapping(array(
-                'exceptionClassName' => 'My\FormException',
-                'factory' => 'form',
+                'exceptionClassName' => 'My\CustomException',
+                'factory' => 'custom',
                 'httpStatusCode' => 400,
                 'errorCode' => 400110,
                 'errorMessage' => 'Validation failed',
@@ -115,6 +116,7 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
         return array(
             "tbbc_restutil" => array (
                 "error" => array (
+                    'use_bundled_factories' => false,
                     'exception_mapping' => array(
                         'InvalidArgumentException' => array(
                             'class' => '\RuntimeException',
@@ -125,9 +127,9 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
                             'error_extended_message' => 'Extended message',
                             'error_more_info_url' => 'http://api.my.tld/doc/error/500123',
                         ),
-                        'FormException' => array(
-                            'class' => 'My\FormException',
-                            'factory' => 'form',
+                        'CustomException' => array(
+                            'class' => 'My\CustomException',
+                            'factory' => 'custom',
                             'http_status_code' => 400,
                             'error_code' => 400110,
                             'error_message' => 'Validation failed',
@@ -141,11 +143,11 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class FormErrorFactory implements ErrorFactoryInterface
+class CustomErrorFactory implements ErrorFactoryInterface
 {
     public function getIdentifier()
     {
-        return 'form';
+        return 'custom';
     }
 
     public function createError(\Exception $exception, ExceptionMappingInterface $mapping)

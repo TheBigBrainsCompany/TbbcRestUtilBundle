@@ -7,6 +7,7 @@
         <parameter key="tbbc_restutil.error.mapping.exception_mapping.class">Tbbc\RestUtil\Error\Mapping\ExceptionMapping</parameter>
         <parameter key="tbbc_restutil.error.mapping.exception_map.class">Tbbc\RestUtil\Error\Mapping\ExceptionMap</parameter>
         <parameter key="tbbc_restutil.error.error_resolver.class">Tbbc\RestUtil\Error\ErrorResolver</parameter>
+        <parameter key="tbbc_restutil.error.default_error_factory.class">Tbbc\RestUtil\Error\DefaultErrorFactory</parameter>
     </parameters>
 
     <services>
@@ -14,6 +15,10 @@
 
         <service id="tbbc_restutil.error.error_resolver" class="%tbbc_restutil.error.error_resolver.class%">
             <argument type="service" id="tbbc_restutil.error.mapping.exception_map" />
+        </service>
+
+        <service id="tbbc_restutil.error.default_error_factory" class="%tbbc_restutil.error.default_error_factory.class%">
+            <tag name="tbbc_restutil.error_factory" />
         </service>
     </services>
 </container>
