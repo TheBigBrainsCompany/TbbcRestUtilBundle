@@ -64,7 +64,7 @@ tbbc_rest_util:
                 error_code: 501001
                 more_info_url: "http://api.my.tld/doc/error/501001"
             Exception:
-                class: "\Exception"
+                class: "\\Exception"
                 factory: default
                 http_status_code: 500
                 error_code: 501203
