@@ -4,14 +4,11 @@ The Big Brains Company - TbbcRestUtilBundle
 
 A bundle for integrating tbbc/rest-util lib in a Symfony application
 
-Quick Start
------------
-
 Table of contents
 -----------------
 
 1. [Installation](#installation)
-2. [Quick started](#quick-started)
+2. [Quick start](#quick-start)
 3. [Usage](#usage)
 4. [Run the test](#run-the-test)
 5. [Contributing](#contributing)
@@ -19,10 +16,6 @@ Table of contents
 7. [Authors](#authors)
 8. [License](#license)
 
-Description
------------
-
-A bundle for integrating tbbc/rest-util lib in a Symfony application
 
 Installation
 ------------
