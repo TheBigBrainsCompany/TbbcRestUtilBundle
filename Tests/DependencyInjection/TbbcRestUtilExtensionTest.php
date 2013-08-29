@@ -86,19 +86,23 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
         $exceptionMap
             ->add(new ExceptionMapping(array(
                 'exceptionClassName' => '\RuntimeException',
-                'factory'            => '__DEFAULT__',
-                'httpStatusCode'     => 500,
-                'errorCode'          => 123,
-                'errorMessage'       => 'Server error',
+                'factory' => '__DEFAULT__',
+                'httpStatusCode' => 500,
+                'errorCode' => 500123,
+                'errorMessage' => 'Server error',
+                'errorExtendedMessage' => 'Extended message',
+                'errorMoreInfoUrl' => 'http://api.my.tld/doc/error/500123',
             )))
         ;
 
         $exceptionMap->add(new ExceptionMapping(array(
                 'exceptionClassName' => 'My\FormException',
-                'factory'            => 'form',
-                'httpStatusCode'     => 400,
-                'errorCode'          => 110,
-                'errorMessage'       => 'Validation failed',
+                'factory' => 'form',
+                'httpStatusCode' => 400,
+                'errorCode' => 400110,
+                'errorMessage' => 'Validation failed',
+                'errorExtendedMessage' => 'Extended message',
+                'errorMoreInfoUrl' => 'http://api.my.tld/doc/error/400110',
             )))
         ;
 
@@ -118,15 +122,20 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
                             'class' => '\RuntimeException',
                             'factory' => 'default',
                             'http_status_code' => 500,
-                            'error_code' => 123,
+                            'error_code' => 500123,
                             'error_message' => 'Server error',
+                            'error_extended_message' => 'Extended message',
+                            'error_more_info_url' => 'http://api.my.tld/doc/error/500123',
+
                         ),
                         'FormException' => array(
                             'class' => 'My\FormException',
                             'factory' => 'form',
                             'http_status_code' => 400,
-                            'error_code' => 110,
+                            'error_code' => 400110,
                             'error_message' => 'Validation failed',
+                            'error_extended_message' => 'Extended message',
+                            'error_more_info_url' => 'http://api.my.tld/doc/error/400110',
                         ),
                     ),
                 ),

@@ -41,6 +41,14 @@ class Configuration implements ConfigurationInterface
      * tbbc_restutil:
      *     error:
      *         exception_mapping:
+     *             InvalidArgumentException:
+     *                 class: "\InvalidArgumentException"
+     *                 factory: default
+     *                 http_status_code: 400
+     *                 error_code: 400101
+     *                 error_message: "Invalid argument exception"
+     *                 error_extended_message: "More extended message"
+     *                 error_more_info_url: "http://api.my.tld/doc/error/400101"
      *
      * @param ArrayNodeDefinition $node
      * @return void
@@ -64,6 +72,8 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('http_status_code')->isRequired()->cannotBeEmpty()->end()
                                     ->scalarNode('error_code')->isRequired()->cannotBeEmpty()->end()
                                     ->scalarNode('error_message')->cannotBeEmpty()->end()
+                                    ->scalarNode('error_extended_message')->end()
+                                    ->scalarNode('error_more_info_url')->end()
                                 ->end()
                             ->end()
                         ->end()
