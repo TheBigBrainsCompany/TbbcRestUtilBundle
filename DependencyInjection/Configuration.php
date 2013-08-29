@@ -14,7 +14,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Configuration for tbbc_restutil
+ * Configuration for tbbc_rest_util
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('tbbc_restutil');
+        $rootNode = $treeBuilder->root('tbbc_rest_util');
 
         $this->addErrorSection($rootNode);
 
@@ -36,9 +36,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Parses the tbbc_restutil.error config section
+     * Parses the tbbc_rest_util.error config section
      * Example for yaml driver:
-     * tbbc_restutil:
+     * tbbc_rest_util:
      *     error:
      *         use_bundled_factories: true
      *         exception_mapping:

@@ -24,7 +24,7 @@ class FormErrorFactory implements ErrorFactoryInterface
      */
     public function getIdentifier()
     {
-        return 'tbbc_restutil_form_error';
+        return 'tbbc_rest_util_form_error';
     }
 
     /**

@@ -60,7 +60,7 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
         // add custom factory definition to the container
         $customErrorFactoryDefinition = new Definition(
             '\Tbbc\RestUtilBundle\Tests\DependencyInjection\Compiler\CustomErrorFactory');
-        $customErrorFactoryDefinition->addTag('tbbc_restutil.error_factory');
+        $customErrorFactoryDefinition->addTag('tbbc_rest_util.error_factory');
         $this->container->addDefinitions(array($customErrorFactoryDefinition));
 
         $this->container->compile();
@@ -71,7 +71,7 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
         $expectedErrorResolver->registerFactory(new DefaultErrorFactory());
         $expectedErrorResolver->registerFactory(new CustomErrorFactory());
 
-        $this->assertEquals($expectedErrorResolver, $this->container->get('tbbc_restutil.error.error_resolver'));
+        $this->assertEquals($expectedErrorResolver, $this->container->get('tbbc_rest_util.error.error_resolver'));
     }
 
     /**
@@ -114,7 +114,7 @@ class ErrorFactoryCompilerPassTest extends \PHPUnit_Framework_TestCase
     private function getConfig()
     {
         return array(
-            "tbbc_restutil" => array (
+            "tbbc_rest_util" => array (
                 "error" => array (
                     'use_bundled_factories' => false,
                     'exception_mapping' => array(

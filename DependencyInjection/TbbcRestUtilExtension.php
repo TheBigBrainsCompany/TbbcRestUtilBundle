@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Extension for tbbc_restutil
+ * Extension for tbbc_rest_util
  *
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
@@ -53,8 +53,8 @@ class TbbcRestUtilExtension extends Extension
             return;
         }
 
-        $exceptionMapDefinition = $container->getDefinition('tbbc_restutil.error.mapping.exception_map');
-        $exceptionMappingClass = $container->getParameter('tbbc_restutil.error.mapping.exception_mapping.class');
+        $exceptionMapDefinition = $container->getDefinition('tbbc_rest_util.error.mapping.exception_map');
+        $exceptionMappingClass = $container->getParameter('tbbc_rest_util.error.mapping.exception_mapping.class');
         foreach($config['error']['exception_mapping'] as $mappingConfig) {
             $mappingDefinition = new Definition($exceptionMappingClass, array(array(
                 'exceptionClassName' => $mappingConfig['class'],

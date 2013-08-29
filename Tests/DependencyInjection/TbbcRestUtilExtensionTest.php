@@ -60,7 +60,7 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
 
         $expectedExceptionMap = $this->getExceptionMap();
 
-        $this->assertEquals($expectedExceptionMap, $this->container->get('tbbc_restutil.error.mapping.exception_map'));
+        $this->assertEquals($expectedExceptionMap, $this->container->get('tbbc_rest_util.error.mapping.exception_map'));
     }
 
     public function testErrorResolverIsConstructedCorrectly()
@@ -74,7 +74,7 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
         $expectedErrorResolver = new ErrorResolver($exceptionMap);
         $expectedErrorResolver->registerFactory(new DefaultErrorFactory());
 
-        $this->assertEquals($expectedErrorResolver, $this->container->get('tbbc_restutil.error.error_resolver'));
+        $this->assertEquals($expectedErrorResolver, $this->container->get('tbbc_rest_util.error.error_resolver'));
     }
 
     /**
@@ -117,7 +117,7 @@ class TbbcRestUtilExtensionTest extends \PHPUnit_Framework_TestCase
     private function getConfig()
     {
         return array(
-            "tbbc_restutil" => array (
+            "tbbc_rest_util" => array (
                 "error" => array (
                     'use_bundled_factories' => false,
                     'exception_mapping' => array(

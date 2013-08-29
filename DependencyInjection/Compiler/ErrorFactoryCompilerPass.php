@@ -25,12 +25,12 @@ class ErrorFactoryCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('tbbc_restutil.error.error_resolver')) {
+        if (!$container->hasDefinition('tbbc_rest_util.error.error_resolver')) {
             return;
         }
 
-        $errorResolverDefinition = $container->getDefinition('tbbc_restutil.error.error_resolver');
-        foreach ($container->findTaggedServiceIds('tbbc_restutil.error_factory') as $id => $attributes) {
+        $errorResolverDefinition = $container->getDefinition('tbbc_rest_util.error.error_resolver');
+        foreach ($container->findTaggedServiceIds('tbbc_rest_util.error_factory') as $id => $attributes) {
             $errorResolverDefinition->addMethodCall('registerFactory', array(new Reference($id)));
         }
     }
