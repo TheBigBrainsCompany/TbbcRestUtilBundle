@@ -56,7 +56,7 @@ class FormErrorException extends \InvalidArgumentException
                 /** @Ignore */
                 $message = $translator->trans($message, $error->getMessageParameters(), 'validators');
             }
-            $this->formErrors['form_errors'] = $message;
+            array_push($this->formErrors['form_errors'], $message);
         }
 
         $this->formErrors['field_errors'] = array();

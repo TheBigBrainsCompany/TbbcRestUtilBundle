@@ -39,11 +39,6 @@ class FormErrorFactoryTest extends \PHPUnit_Framework_TestCase
     private $formErrorExceptionMapping;
 
     /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
      * @var FormInterface
      */
     private $form;
@@ -71,7 +66,7 @@ class FormErrorFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        unset($this->errorResolver, $this->translator, $this->form, $this->formErrorExceptionMapping);
+        unset($this->errorResolver, $this->form, $this->formErrorExceptionMapping);
     }
 
 
@@ -86,15 +81,22 @@ class FormErrorFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFormErrorFactoryCreateErrorReturnsValidErrorObject()
     {
         $formErrorFactory = new FormErrorFactory();
-        $formErrorException = new FormErrorException($this->form, $this->translator);
+        $formErrorException = new FormErrorException($this->form);
 
         $expectedError = new Error(
             400,
             400101,
             'An error has occurred while processing your request, make sure your data are valid',
             array(
-                'form_errors' => null,
-                'field_errors' => array(),
+                'global_errors' => array('Error!'),
+                'property_errors' => array(
+                    'foo' => array(
+                        'Foo should not be blank',
+                    ),
+                    'bar' => array(
+                        'This value is not a valid Bar',
+                    )
+                ),
             ),
             'http://api.my.tld/doc/error/400101'
         );
@@ -109,9 +111,20 @@ class FormErrorFactoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function createForm()
     {
-        $form = $this->getBuilder('tbbc_rest_util_bundle_test', new EventDispatcher())->getForm();
-        $form->bind('foobar');
+        $eventDispatcher = new EventDispatcher();
+
+        $mapper = $this->getMock('\Symfony\Component\Form\DataMapperInterface');
+        $form = $this->getBuilder('name', $eventDispatcher)
+            ->setCompound(true)
+            ->setDataMapper($mapper)
+            ->getForm();
+
+        $form->add($this->getBuilder('foo', $eventDispatcher)->setCompound(false)->getForm());
+        $form->add($this->getBuilder('bar', $eventDispatcher)->setCompound(false)->getForm());
+
         $form->addError(new FormError('Error!'));
+        $form->get('foo')->addError(new FormError('Foo should not be blank'));
+        $form->get('bar')->addError(new FormError('This value is not a valid Bar'));
 
         return $form;
     }

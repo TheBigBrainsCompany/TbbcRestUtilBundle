@@ -24,7 +24,7 @@ class FormErrorFactory implements ErrorFactoryInterface
      */
     public function getIdentifier()
     {
-        return 'form_error';
+        return 'tbbc_restutil_form_error';
     }
 
     /**
@@ -36,8 +36,19 @@ class FormErrorFactory implements ErrorFactoryInterface
             return null;
         }
 
-        return new Error($mapping->getHttpStatusCode(), $mapping->getErrorCode(), $mapping->getErrorMessage(),
-            $exception->getFormErrors(), $mapping->getErrorMoreInfoUrl());
+        $errorMessage = $mapping->getErrorMessage();
+        if (empty($errorMessage)) {
+            $errorMessage = $exception->getMessage();
+        }
+
+        $formErrors = $exception->getFormErrors();
+        $extendedMessage = array(
+            'global_errors' => $formErrors['form_errors'],
+            'property_errors' => $formErrors['field_errors'],
+        );
+
+        return new Error($mapping->getHttpStatusCode(), $mapping->getErrorCode(), $errorMessage,
+            $extendedMessage, $mapping->getErrorMoreInfoUrl());
     }
 
     /**
