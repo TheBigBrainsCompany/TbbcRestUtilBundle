@@ -1,6 +1,7 @@
 The Big Brains Company - TbbcRestUtilBundle
 ==============
 [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcRestUtilBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcRestUtilBundle)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/TheBigBrainsCompany/TbbcRestUtilBundle/badges/quality-score.png?s=802ae6f0f19e5a90b9fcd6e5ae512943eeb40912)](https://scrutinizer-ci.com/g/TheBigBrainsCompany/TbbcRestUtilBundle/)
 
 A bundle for integrating tbbc/rest-util lib in a Symfony application
 
