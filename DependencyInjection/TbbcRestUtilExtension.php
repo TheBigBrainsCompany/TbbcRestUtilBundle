@@ -61,9 +61,9 @@ class TbbcRestUtilExtension extends Extension
                 'factory' => 'default' == $mappingConfig['factory'] ? '__DEFAULT__' : $mappingConfig['factory'],
                 'httpStatusCode' => $mappingConfig['http_status_code'],
                 'errorCode' => $mappingConfig['error_code'],
-                'errorMessage' => $mappingConfig['error_message'],
-                'errorExtendedMessage' => $mappingConfig['error_extended_message'],
-                'errorMoreInfoUrl' => $mappingConfig['error_more_info_url'],
+                'errorMessage' => isset($mappingConfig['error_message']) ? $mappingConfig['error_message'] : null,
+                'errorExtendedMessage' => isset($mappingConfig['error_extended_message']) ? $mappingConfig['error_extended_message'] : null,
+                'errorMoreInfoUrl' => isset($mappingConfig['error_more_info_url']) ? $mappingConfig['error_more_info_url'] : null,
             )));
 
             $exceptionMapDefinition->addMethodCall('add', array($mappingDefinition));
