@@ -8,3 +8,4 @@ catalog.xml
 .idea
 *.project
 .vagrant
+bin/phpunit
