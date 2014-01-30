@@ -62,7 +62,7 @@ class TbbcRestUtilExtension extends Extension
                 'httpStatusCode' => $mappingConfig['http_status_code'],
                 'errorCode' => $mappingConfig['error_code'],
                 'errorMessage' => isset($mappingConfig['error_message']) ? $mappingConfig['error_message'] : null,
-                'errorExtendedMessage' => isset($mappingConfig['error_extended_message'] ? $mappingConfig['error_extended_message'] : null,
+                'errorExtendedMessage' => isset($mappingConfig['error_extended_message']) ? $mappingConfig['error_extended_message'] : null,
                 'errorMoreInfoUrl' => isset($mappingConfig['error_more_info_url']) ? $mappingConfig['error_more_info_url'] : null,
             )));
 
