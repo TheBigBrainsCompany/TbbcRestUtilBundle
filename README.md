@@ -3,7 +3,7 @@ The Big Brains Company - TbbcRestUtilBundle
 [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcRestUtilBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcRestUtilBundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/TheBigBrainsCompany/TbbcRestUtilBundle/badges/quality-score.png?s=802ae6f0f19e5a90b9fcd6e5ae512943eeb40912)](https://scrutinizer-ci.com/g/TheBigBrainsCompany/TbbcRestUtilBundle/)
 
-A bundle for integrating tbbc/rest-util lib in a Symfony application
+A bundle for integrating [tbbc/rest-util](https://github.com/TheBigBrainsCompany/rest-util) lib in a Symfony application
 
 Table of contents
 -----------------
@@ -30,6 +30,8 @@ Using [Composer](http://getcomposer.org/), just `$ composer require tbbc/rest-ut
   }
 }
 ```
+
+**Note**: _because the `tbbc/rest-util` lib has not been taggued as stable yet, you may need to require it manually before `composer require tbbc/rest-util`._
 
 Quick start
 -----------
