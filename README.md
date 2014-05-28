@@ -350,3 +350,5 @@ License
 -------
 
 `The Big Brains Company - TbbcRestUtilBundle` is licensed under the MIT License - see the LICENSE file for details
+
+[![The Big Brains Company - Logo](http://tbbc-valid.thebigbrainscompany.com/assets/images/logo-tbbc.png)](http://thebigbrainscompany.com)
