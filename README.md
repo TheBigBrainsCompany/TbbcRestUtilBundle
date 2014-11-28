@@ -26,12 +26,10 @@ Using [Composer](http://getcomposer.org/), just `$ composer require tbbc/rest-ut
 ```json
 {
   "require": {
-    "tbbc/rest-util-bundle": "dev-master"
+    "tbbc/rest-util-bundle": "@stable"
   }
 }
 ```
-
-**Note**: _because the `tbbc/rest-util` lib has not been taggued as stable yet, you may need to require it manually before `composer require tbbc/rest-util`._
 
 Quick start
 -----------
