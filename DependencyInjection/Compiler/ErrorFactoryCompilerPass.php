@@ -29,7 +29,9 @@ class ErrorFactoryCompilerPass implements CompilerPassInterface
             return;
         }
 
-        $errorResolverDefinition = $container->getDefinition('tbbc_rest_util.error.error_resolver');
+        $errorResolverDefinition = $container->getDefinition(
+            $container->getParameter('tbbc_rest_util.error_resolver_service_id')
+        );
         foreach ($container->findTaggedServiceIds('tbbc_rest_util.error_factory') as $id => $attributes) {
             $errorResolverDefinition->addMethodCall('registerFactory', array(new Reference($id)));
         }

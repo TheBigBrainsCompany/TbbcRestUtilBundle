@@ -43,6 +43,8 @@ class TbbcRestUtilExtension extends Extension
             $loader->load('error_factories.xml');
         }
 
+        $container->setParameter('tbbc_rest_util.error_resolver_service_id', $config['error']['error_resolver']);
+
         // mapping configuration
         $this->configureErrorExceptionMapping($config, $container);
     }
