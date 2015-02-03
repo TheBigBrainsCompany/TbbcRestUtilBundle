@@ -342,7 +342,8 @@ Requirements
 Authors
 -------
 
-Benjamin Dulau - benjamin.dulau@gmail.com
+* Benjamin Dulau - benjamin.dulau@gmail.com
+* Valentin Ferriere - valentin@v-labs.fr
 
 License
 -------

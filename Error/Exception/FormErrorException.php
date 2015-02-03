@@ -16,6 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Boris Guéry <guery.b@gmail.com>
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
+ * @author Valentin Ferriere <valentin@v-labs.fr>
  */
 class FormErrorException extends \InvalidArgumentException
 {
@@ -46,29 +47,51 @@ class FormErrorException extends \InvalidArgumentException
     private function buildErrorsTree(FormInterface $form)
     {
         $this->formErrors = array();
-        $translator = $this->translator;
 
         $this->formErrors['form_errors'] = array();
         foreach ($form->getErrors() as $error) {
             /** @var $error FormError */
             $message = $error->getMessage();
-            if ($translator) {
+            if ($this->translator) {
                 /** @Ignore */
-                $message = $translator->trans($message, $error->getMessageParameters(), 'validators');
+                $message = $this->translator->trans($message, $error->getMessageParameters(), 'validators');
             }
             array_push($this->formErrors['form_errors'], $message);
         }
 
         $this->formErrors['field_errors'] = array();
+        $this->buildFormFieldErrorTree($form);
+    }
+
+    /**
+     * @param FormInterface $form
+     */
+    private function buildFormFieldErrorTree(FormInterface $form, $name = null) {
+
         foreach ($form->all() as $key => $child) {
+            $children = count($child->all());
+
+            if($children > 0 && !is_int($key)) {
+                $name = $key;
+            }
+
             /** @var $error FormError */
             foreach ($child->getErrors() as $error) {
                 $message = $error->getMessage();
-                if ($translator) {
+                if ($this->translator) {
                     /** @Ignore */
-                    $message = $translator->trans($message, $error->getMessageParameters(), 'validators');
+                    $message = $this->translator->trans($message, $error->getMessageParameters(), 'validators');
                 }
-                $this->formErrors['field_errors'][$key][] = $message;
+
+                if($name == null) {
+                    $this->formErrors['field_errors'][$key][] = $message;
+                } else {
+                    $this->formErrors['field_errors'][sprintf('%s-%s-%s', $name, $form->getName(), $key)][] = $message;
+                }
+            }
+
+            if($children > 0) {
+                $this->buildFormFieldErrorTree($child , $name);
             }
         }
     }
