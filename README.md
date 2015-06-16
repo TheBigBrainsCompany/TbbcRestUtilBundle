@@ -49,7 +49,7 @@ tbbc_rest_util:
                 http_status_code: 400
                 error_code: 400101
                 error_message: "Invalid input"
-                more_info_url: "http://api.my.tld/doc/error/400101"
+                error_more_info_url: "http://api.my.tld/doc/error/400101"
             AccessDeniedException:
                 class: "Symfony\\Component\\Security\\Core\\AccessDeniedException"
                 factory: default
@@ -57,13 +57,13 @@ tbbc_rest_util:
                 error_code: 401001
                 error_message: "Access denied"
                 extended_message: "The given token don't have enough privileges for accessing to this resource"
-                more_info_url: "http://api.my.tld/doc/error/401001"
+                error_more_info_url: "http://api.my.tld/doc/error/401001"
             CustomException:
                 class: "My\\ApiBundle\\Exception\\CustomException"
                 factory: my_api_custom
                 http_status_code: 501
                 error_code: 501001
-                more_info_url: "http://api.my.tld/doc/error/501001"
+                error_more_info_url: "http://api.my.tld/doc/error/501001"
             Exception:
                 class: "\\Exception"
                 factory: default
