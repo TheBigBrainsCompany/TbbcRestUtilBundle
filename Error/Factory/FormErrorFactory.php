@@ -30,7 +30,7 @@ class FormErrorFactory implements ErrorFactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function createError(\Exception $exception, ExceptionMappingInterface $mapping)
+    public function createError(\Throwable $exception, ExceptionMappingInterface $mapping)
     {
         if (!$this->supportsException($exception)) {
             return null;
@@ -54,7 +54,7 @@ class FormErrorFactory implements ErrorFactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function supportsException(\Exception $exception)
+    public function supportsException(\Throwable $exception)
     {
         return $exception instanceof FormErrorException;
     }
