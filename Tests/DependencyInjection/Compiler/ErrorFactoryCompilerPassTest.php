@@ -150,7 +150,7 @@ class CustomErrorFactory implements ErrorFactoryInterface
         return 'custom';
     }
 
-    public function createError(\Exception $exception, ExceptionMappingInterface $mapping)
+    public function createError(\Throwable $exception, ExceptionMappingInterface $mapping)
     {
         return new Error($mapping->getHttpStatusCode(), $mapping->getErrorCode(), $mapping->getErrorMessage());
     }

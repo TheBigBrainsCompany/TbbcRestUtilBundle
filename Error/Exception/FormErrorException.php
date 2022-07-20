@@ -11,7 +11,7 @@ namespace Tbbc\RestUtilBundle\Error\Exception;
 
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Boris Guéry <guery.b@gmail.com>
@@ -25,7 +25,7 @@ class FormErrorException extends \InvalidArgumentException
 
     public function __construct(FormInterface $form, TranslatorInterface $translator = null,
                                 $message = 'An error has occurred while processing your request, make sure your data are valid',
-                                $code = 400, \Exception $previous = null)
+                                $code = 400, \Throwable $previous = null)
     {
         $this->translator = $translator;
         $this->buildErrorsTree($form);
